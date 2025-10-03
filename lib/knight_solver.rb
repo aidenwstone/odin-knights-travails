@@ -21,4 +21,16 @@ module KnightSolver
       new_pos if new_pos.all? { |coord| coord.between?(0, 7) }
     end
   end
+
+  def reconstruct_path(node)
+    path = []
+    curr_node = node
+
+    until curr_node.nil?
+      path.unshift(curr_node.position)
+      curr_node = curr_node.parent
+    end
+
+    path
+  end
 end

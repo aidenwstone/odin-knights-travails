@@ -9,7 +9,15 @@ module KnightSolver
 
   Node = Data.define(:position, :parent)
 
-  def knight_moves(start_pos, end_pos); end
+  def knight_moves(start_pos, end_pos)
+    path = shortest_path(start_pos, end_pos)
+    if path.nil?
+      puts 'Could not find path.'
+    else
+      puts "You made it in #{path.size - 1} moves! Here's your path:"
+      path.each { |pos| p pos }
+    end
+  end
 
   private
 

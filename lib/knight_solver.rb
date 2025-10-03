@@ -7,6 +7,8 @@ require 'set'
 module KnightSolver
   extend self
 
+  Node = Data.define(:position, :parent)
+
   def knight_moves(start_pos, end_pos); end
 
   private

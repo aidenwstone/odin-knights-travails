@@ -13,6 +13,26 @@ module KnightSolver
 
   private
 
+  def shortest_path(start_pos, end_pos) # rubocop:disable Metrics/MethodLength
+    queue = [Node.new(start_pos, nil)]
+    visited = Set.new
+
+    until queue.empty?
+      curr_node = queue.shift
+
+      return reconstruct_path(curr_node) if curr_node.position == end_pos
+
+      next_moves = available_moves(*curr_node.position)
+
+      next_moves.each do |next_pos|
+        unless visited.include?(next_pos)
+          visited.add(next_pos)
+          queue.push(Node.new(next_pos, curr_node))
+        end
+      end
+    end
+  end
+
   def available_moves(row, col)
     offsets = [2, -2].product([1, -1]) + [1, -1].product([2, -2])
     offsets.filter_map do |row_offset, col_offset|
